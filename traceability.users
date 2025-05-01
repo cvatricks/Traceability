@@ -1,0 +1,15 @@
+from flask import Flask, request, jsonify, render_template
+from werkzeug.security import generate_password_hash
+from flask_pymongo import PyMongo
+
+app = Flask(__name__)
+
+# MongoDB Connection
+app.config["MONGO_URI"] = "mongodb+srv://sivaprakasamulaganathan:7yVnXJwsk8M1p1Af@cluster0.v6vqw1o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+mongo = PyMongo(app)
+
+
+mongo.db.users.insert_one({
+    "login_id": "admin",
+    "password": generate_password_hash("password123")  # Stores hashed password
+})
