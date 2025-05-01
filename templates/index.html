@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traceability Login</title>
+    <link rel="stylesheet" href="\static\login.css">
+</head>
+<script>
+    const HOST = "{{ HOST }}";
+    const PORT = "{{ PORT }}";
+    const sessionData = localStorage.getItem('session');
+    if (sessionData) {
+      window.location.href = "dashboard";  // Redirect to dashboard
+      /* try {
+        const jsonData = JSON.parse(storedData);
+        console.log('User data:', jsonData);
+        // Access specific properties of the JSON object
+        console.log('User name:', jsonData.name);
+        console.log('User email:', jsonData.email);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+      */
+    }
+
+</script>
+<body>
+
+    <div class="login-container">
+        <h2>Traceability Login</h2>
+        <input type="text" id="loginId" placeholder="Enter Login ID">
+        <span class="error" id="loginError">Login ID required</span>
+        
+        <input type="password" id="password" placeholder="Enter Password">
+        <span class="error" id="passwordError">Password required</span>
+
+        <button id="loginBtn">Login</button>
+    </div>
+
+    <script>
+document.getElementById("loginBtn").addEventListener("click", async function() {
+    const loginId = document.getElementById("loginId").value.trim();
+    const password = document.getElementById("password").value.trim();
+    
+    if (!loginId || !password) {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    const response = await fetch("http://" + HOST + ":" + PORT + "/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ loginId, password })
+    });
+
+    const data = await response.json();
+
+    function getFormattedDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+    }
+
+    if (data.success) {
+        alert("Login successful!");
+        datetime = getFormattedDateTime();
+        session = {
+            "login_id": loginId,
+            "login_time": datetime
+        }
+        window.localStorage.setItem("session", JSON.stringify(session));
+        window.location.href = "dashboard";  // Redirect to dashboard
+    } else {
+        alert(data.message);
+    }
+});
+
+    </script>
+
+</body>
+</html>
