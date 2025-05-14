@@ -11,5 +11,6 @@ class Config(object):
     workdata = mydb["data"]
 
     # Connection
-    HOST = "0.0.0.0"
-    PORT = "0"
+    HOST = "traceability-sdzt.onrender.com"
+    IP = "127.0.0.1"
+    PORT = "80"
