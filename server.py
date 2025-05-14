@@ -96,4 +96,4 @@ def reports():
 
 if __name__ == "__main__":
     #app.run(debug=True)
-    app.run(host=Config.HOST, port=Config.PORT)
+    app.run(host=Config.IP, port=Config.PORT)
