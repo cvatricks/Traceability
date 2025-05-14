@@ -11,5 +11,5 @@ class Config(object):
     workdata = mydb["data"]
 
     # Connection
-    HOST = "192.168.0.102"
-    PORT = "5000"
+    HOST = "0.0.0.0"
+    PORT = "80"
