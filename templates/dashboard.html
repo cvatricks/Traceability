@@ -64,7 +64,7 @@ th {
 
         document.getElementById("reportsBtn").addEventListener("click", async function() {
             let optionsContainer = document.getElementById("options");
-            optionsContainer.innerHTML = "<table><tr><td>Process</td><td>Work</td><td>DateTime</td><td>Job ID</td></tr></table>";
+            optionsContainer.innerHTML = "<p>Loading...</p><br>";
             const response = await fetch("http://" + HOST + ":" + PORT + "/reports", {
                 method: "POST",
                 headers: {
