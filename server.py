@@ -81,7 +81,7 @@ def updatedata():
 def reports():
     data = request.json
     user = data.get("user")
-    report = "<tr style="background-color:#FBCEB1;"><td>Process</td><td>Work</td><td>DateTime</td><td>Job ID</td></tr>"
+    report = "<tr style='background-color:#FBCEB1;'><td>Process</td><td>Work</td><td>DateTime</td><td>Job ID</td></tr>"
     workdata = {
         "process_name" : "{}".format(user)
     }
@@ -89,7 +89,7 @@ def reports():
     for x in workdataupdated:
         itsdata = f'<tr><td>{x.get("process_name")}</td><td>{x.get("work")}</td><td>{x.get("datetime")}</td><td>{x.get("jobid")}</td></tr>'
         report = report + itsdata
-    if report != "<tr style="background-color:#FBCEB1;"><td>Process</td><td>Work</td><td>DateTime</td><td>Job ID</td></tr>":
+    if report != "<tr style='background-color:#FBCEB1;'><td>Process</td><td>Work</td><td>DateTime</td><td>Job ID</td></tr>":
         return jsonify({"success": True, "message": report})
     else:
         return jsonify({"success": False, "message": "No records Found!"})
