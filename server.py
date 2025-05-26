@@ -68,10 +68,11 @@ def workend():
 def updatedata():
     data = request.json
     decodedText = data.get("decodedText")
+    wtype = data.get("WTYPE")
     user = data.get("user")
     workdata = {
         "process_name" : user,
-        "work" : "start",
+        "work" : wtype,
         "datetime" : datetime.now(),
         "jobid" : decodedText
     }
