@@ -89,6 +89,19 @@ table, th, td {
             });
             window.location.href = "/workstart"; 
         });
+
+        document.getElementById("workEndBtn").addEventListener("click", async function() {
+            let optionsContainer = document.getElementById("options");
+            const response = await fetch("http://" + HOST + ":" + PORT + "/workend", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user })
+            });
+            window.location.href = "/workend"; 
+        });
+        
         document.getElementById("logOutBtn").addEventListener("click", async function() {
             const sessionData = localStorage.getItem('session');
             const sessionJSON = JSON.parse(sessionData);
