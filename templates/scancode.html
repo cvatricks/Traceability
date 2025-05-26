@@ -11,6 +11,7 @@
 <script>
     const HOST = "{{ HOST }}";
     const PORT = "{{ PORT }}";
+    const WTYPE = "{{ WTYPE }}";
     const sessionData = localStorage.getItem('session');
     if (!sessionData) {
         window.location.href = "/";  // Redirect to login
@@ -84,7 +85,7 @@
                         headers: {
                             "Content-Type": "application/json"
                         },
-                        body: JSON.stringify({ user ,decodedText })
+                        body: JSON.stringify({ user ,decodedText ,WTYPE })
                     });
                     const data = await response.json();
                     if (data.success) {
