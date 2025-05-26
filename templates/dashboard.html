@@ -78,16 +78,22 @@ table, th, td {
             }
         });
 
-        document.getElementById("workStartBtn").addEventListener("click", async function() {
-            let optionsContainer = document.getElementById("options");
-            const response = await fetch("http://" + HOST + ":" + PORT + "/workstart", {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ user })
-            });
-            window.location.href = "/workstart"; 
+        document.getElementById("workEndBtn").addEventListener("click", async function() {
+            try {
+                const response = await fetch("/workend", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ user })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    window.location.href = "/workend";
+                } else {
+                    alert("Work end failed: " + data.message);
+                }
+            } catch (error) {
+                alert("Server error: " + error.message);
+            }
         });
 
         document.getElementById("workEndBtn").addEventListener("click", async function() {
