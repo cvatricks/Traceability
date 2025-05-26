@@ -58,7 +58,11 @@ def dashboardPage():
 
 @app.route('/workstart', methods=['GET', 'POST'])
 def workstart():
-    return render_template("/scancode.html", HOST=Config.HOST, PORT=Config.PORT)
+    return render_template("/scancode.html", HOST=Config.HOST, PORT=Config.PORT, WTYPE="start")
+
+@app.route('/workend', methods=['GET', 'POST'])
+def workend():
+    return render_template("/scancode.html", HOST=Config.HOST, PORT=Config.PORT, WTYPE="end")
 
 @app.route('/updatedata', methods=['GET', 'POST'])
 def updatedata():
