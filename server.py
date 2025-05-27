@@ -64,6 +64,10 @@ def workstart():
 def workend():
     return render_template("/scancode.html", HOST=Config.HOST, PORT=Config.PORT, WTYPE="end")
 
+@app.route('/handover', methods=['GET', 'POST'])
+def workend():
+    return render_template("/scancode.html", HOST=Config.HOST, PORT=Config.PORT, WTYPE="handover")
+
 @app.route('/updatedata', methods=['GET', 'POST'])
 def updatedata():
     data = request.json
