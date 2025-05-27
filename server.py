@@ -65,7 +65,7 @@ def workend():
     return render_template("/scancode.html", HOST=Config.HOST, PORT=Config.PORT, WTYPE="end")
 
 @app.route('/handover', methods=['GET', 'POST'])
-def workend():
+def handover():
     return render_template("/scancode.html", HOST=Config.HOST, PORT=Config.PORT, WTYPE="handover")
 
 @app.route('/updatedata', methods=['GET', 'POST'])
