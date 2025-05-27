@@ -82,9 +82,9 @@ def updatedata():
     }
     workdataupdated = workdbdata.insert_one(workdata)
     if workdataupdated:
-        return jsonify({"success": True, "message": f"Work started by {user}"})
+        return jsonify({"success": True, "message": f"Work status updated by {user}"})
     else:
-        return jsonify({"success": False, "message": "Work not able to start!"})
+        return jsonify({"success": False, "message": "Work status not able to update!"})
 
 @app.route('/reports', methods=['GET', 'POST'])
 def reports():
