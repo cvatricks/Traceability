@@ -101,6 +101,18 @@ table, th, td {
             });
             window.location.href = "/workend"; 
         });
+
+        document.getElementById("HandOverBtn").addEventListener("click", async function() {
+            let optionsContainer = document.getElementById("options");
+            const response = await fetch("http://" + HOST + ":" + PORT + "/handover", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ user })
+            });
+            window.location.href = "/handover"; 
+        });
         
         document.getElementById("logOutBtn").addEventListener("click", async function() {
             const sessionData = localStorage.getItem('session');
