@@ -9,6 +9,7 @@ class Config(object):
     users = mydb["users"]
     sessions = mydb["sessions"]
     workdata = mydb["data"]
+    jobid = mydb["jobid"]
 
     # Connection
     HOST = "traceability-sdzt.onrender.com"
