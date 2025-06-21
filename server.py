@@ -75,7 +75,7 @@ def updatedata():
     decodedText = data.get("decodedText")
     wtype = data.get("WTYPE")
     user = data.get("user")
-    jobid = jobdb.find_one({"qrcode": decodedText})
+    jobid = jobdb.find_one({"qrcode": str(decodedText)})
     if jobid:
        workdata = {
            "process_name" : user,
