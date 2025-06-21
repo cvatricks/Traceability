@@ -10,6 +10,7 @@ app = Flask(__name__)
 users_collection = Config.users  # Collection where users are stored
 active_sessions = Config.sessions # Collection where sessions are stored
 workdbdata = Config.workdata # traceablity data
+jobdb = Config.jobid # traceablity data
 
 @app.route("/", methods=["GET"])
 def indexPage():
@@ -74,18 +75,21 @@ def updatedata():
     decodedText = data.get("decodedText")
     wtype = data.get("WTYPE")
     user = data.get("user")
-    workdata = {
-        "process_name" : user,
-        "work" : wtype,
-        "datetime" : datetime.now(),
-        "jobid" : decodedText
-    }
-    workdataupdated = workdbdata.insert_one(workdata)
-    if workdataupdated:
-        return jsonify({"success": True, "message": f"Work status updated by {user}"})
+    jobid = jobdb.find_one({"qrcode": decodedText})
+    if jobid:
+       workdata = {
+           "process_name" : user,
+           "work" : wtype,
+           "datetime" : datetime.now(),
+           "jobid" : decodedText
+       }
+       workdataupdated = workdbdata.insert_one(workdata)
+       if workdataupdated:
+           return jsonify({"success": True, "message": f"Work status updated by {user}"})
+       else:
+           return jsonify({"success": False, "message": "Work status not able to update!"})
     else:
-        return jsonify({"success": False, "message": "Work status not able to update!"})
-
+       return jsonify({"success": False, "message": "Job not available in database!"})
 @app.route('/reports', methods=['GET', 'POST'])
 def reports():
     data = request.json
