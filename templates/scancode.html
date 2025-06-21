@@ -78,7 +78,7 @@
                     ++countResults;
                     lastResult = decodedText;
                     //console.log(`Scan result ${decodedText}`, decodedResult);
-                    alert("QR Code detected! Finding in database...");
+                    //alert("QR Code detected! Finding in database...");
                     //resultContainer.innerHTML = `<h3>Scanned QR Code:</h3><p>${decodedText}</p>`;
                     const response = await fetch("http://" + HOST + ":" + PORT + "/updatedata", {
                         method: "POST",
