@@ -95,9 +95,12 @@ def reports():
     data = request.json
     user = data.get("user")
     report = "<tr style='background-color:#FBCEB1;'><td>Process</td><td>Work</td><td>DateTime</td><td>Job ID</td></tr>"
-    workdata = {
-        "process_name" : "{}".format(user)
-    }
+    if user == "admin":
+        workdata = ""
+    else:
+       workdata = {
+           "process_name" : "{}".format(user)
+       }
     workdataupdated = workdbdata.find(workdata)
     for x in workdataupdated:
         itsdata = f'<tr><td>{x.get("process_name")}</td><td>{x.get("work")}</td><td>{x.get("datetime")}</td><td>{x.get("jobid")}</td></tr>'
