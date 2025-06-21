@@ -1,5 +1,5 @@
 import datetime
-from datetime import datetime
+from datetime import datetime, timedelta
 from config import Config
 from flask import Flask, request, jsonify, render_template
 from werkzeug.security import check_password_hash
@@ -26,7 +26,7 @@ def login():
 
     if user and (user["password"] == password):
         login_id = login_id
-        login_time = str(datetime.now())
+        login_time = str(datetime.now() + timedelta(hours=5, minutes=30))
         session = {
             "login_id": login_id,
             "login_time": login_time
@@ -80,7 +80,7 @@ def updatedata():
        workdata = {
            "process_name" : user,
            "work" : wtype,
-           "datetime" : datetime.now(),
+           "datetime" : datetime.now() + timedelta(hours=5, minutes=30),
            "jobid" : decodedText
        }
        workdataupdated = workdbdata.insert_one(workdata)
